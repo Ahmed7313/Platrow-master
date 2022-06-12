@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Platrow</string>
+    <string name="title_activity_login_view">LoginView</string>
+    <string name="login_with_pass">Login With Password</string>
+    <string name="enter_pass_text">Enter the Password you created to Login</string>
+    <string name="title_activity_register_view">RegisterView</string>
+    <string name="title_activity_compose_util_functions">ComposeUtilFunctions</string>
+    <string name="item_name_test">Item Name</string>
+</resources>
