@@ -29,11 +29,11 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.example.extendsdailytasks.ProductDetailView
 import com.example.extendtaskfoodapp.navigation.Screen
-import com.example.extendtaskfoodapp.navigation.SetupNavGraph
 import com.example.platrow.model.Product
 import com.example.platrow.ui.theme.PlatrowTheme
 import com.example.platrow.ui.theme.dividerColor
 import com.example.platrow.ui.theme.textColor
+import com.ramcosta.composedestinations.DestinationsNavHost
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
@@ -41,16 +41,19 @@ class MainActivity : ComponentActivity() {
     @OptIn(ExperimentalMaterialApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContent {
-            lateinit var navController: NavHostController
+        lateinit var navController: NavHostController
 
+        setContent {
+            navController = rememberNavController()
             PlatrowTheme {
                 // A surface container using the 'background' color from the theme
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    ProductFullScreen()
+                    //SetupNavGraph(navController)
+
+                    DestinationsNavHost(navGraph = NavGraphs.root)
                 }
             }
         }
@@ -66,7 +69,7 @@ fun Greeting(name: String) {
 @Composable
 fun DefaultPreview() {
     PlatrowTheme {
-        ProductFullScreen()
+        //ProductFullScreen()
     }
 }
 

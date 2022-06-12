@@ -17,13 +17,20 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import androidx.navigation.NavGraphNavigator
 import com.example.extendsdailytasks.ProductDetailView
 import com.example.extendsdailytasks.ProductListScreen
+import com.example.extendtaskfoodapp.navigation.Screen
+import com.example.platrow.destinations.MyCartScreenDestination
 import com.example.platrow.model.Product
 import com.example.platrow.ui.theme.*
+import com.ramcosta.composedestinations.annotation.Destination
+import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 
+@Destination(start = true)
 @Composable
-fun ProductFullScreen(){
+fun ProductFullScreen(navigator: DestinationsNavigator){
     val boolean = true
     Scaffold(
         topBar = {
@@ -89,7 +96,7 @@ fun ProductFullScreen(){
                         Divider(color = TextFieldColor, thickness = 24.dp,
                             modifier = Modifier)
 
-                        MainBtn(text = "Add to Cart"){}
+                        MainBtn(text = "Add to Cart", navigator = navigator)
                     }
 
                 }
@@ -110,17 +117,17 @@ fun DefaultPreview3() {
             "Kikate CHoclate Flavored",
             "122", 30.00, "400", "Choclate")
 
-        ProductFullScreen()
+        //ProductFullScreen()
     }
     
 }
 
 @Composable
-fun MainBtn (text : String, onclick : ()-> Unit){
+fun MainBtn (text : String, navigator: DestinationsNavigator){
     val context = LocalContext.current
 
     OutlinedButton(onClick = {
-       onclick
+        navigator.navigate(MyCartScreenDestination)
     },
         modifier = Modifier
             .fillMaxWidth(1f)

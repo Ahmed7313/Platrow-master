@@ -2,9 +2,11 @@ package com.example.platrow.UIScreens
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
 import androidx.compose.material3.Icon
@@ -25,11 +27,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.rememberImagePainter
 import com.example.platrow.model.Product
-import com.example.platrow.ui.theme.TextGrayColor
 import com.example.platrow.R
-import com.example.platrow.ui.theme.MainColor
-import com.example.platrow.ui.theme.TextFieldColor
 import androidx.compose.runtime.*
+import com.example.platrow.ui.theme.*
 
 val product1 = Product(1,
     listOf("https:\\/\\/www.themealdb.com\\/images\\/category\\/beef.png",
@@ -50,6 +50,7 @@ val product2 = Product(1,
     "20*30", 30.00, "400", "Choclate")
 val listOfProducts = listOf<Product>(product1, product2,)
 
+ var quantityNumber : String = "0"
 
 @Composable
 fun OrderItemListColumn(){
@@ -142,20 +143,6 @@ fun Incrementer (product : Product){
             .height(38.dp)
             .background(color = TextFieldColor),
             horizontalArrangement = Arrangement.SpaceEvenly,) {
-            IconButton(modifier = Modifier.
-            then(Modifier.size(34.dp)),
-                onClick = { number += 1
-                totalPrice = priceCalculator(product.price, number)
-                }) {
-                Icon(
-                    painter = painterResource(id = R.drawable.ic_baseline_add_24),
-                    "contentDescription")
-            }
-
-            Text(text = number.toString(), modifier = Modifier
-                .padding(start = 8.dp, end = 8.dp), textAlign = TextAlign.Center
-                , fontSize = 24.sp)
-
 
             IconButton(modifier = Modifier.
             then(Modifier.size(34.dp)),
@@ -165,10 +152,26 @@ fun Incrementer (product : Product){
                     }else{
                         number -= 1
                         totalPrice = priceCalculator(product.price, number)
+                        quantityNumber = number.toString()
                     }
                 }) {
                 Icon(
                     painter = painterResource(id = R.drawable.ic_baseline_horizontal_rule_24),
+                    "contentDescription")
+            }
+
+            Text(text = number.toString(), modifier = Modifier
+                .padding(start = 8.dp, end = 8.dp), textAlign = TextAlign.Center
+                , fontSize = 24.sp)
+
+            IconButton(modifier = Modifier.
+            then(Modifier.size(34.dp)),
+                onClick = { number += 1
+                    totalPrice = priceCalculator(product.price, number)
+                    quantityNumber = number.toString()
+                }) {
+                Icon(
+                    painter = painterResource(id = R.drawable.ic_baseline_add_24),
                     "contentDescription")
             }
         }
@@ -192,9 +195,39 @@ fun Incrementer (product : Product){
 fun showCartOrderList(){
     Column(modifier = Modifier.fillMaxWidth()) {
         OrderItemListColumn()
+        CheckOutButton ("1")
     }
 }
 
 fun priceCalculator(price : Double, numberOfItems : Int) : Double{
     return price * numberOfItems
+}
+
+@Composable
+fun CheckOutButton (numberOfItems: String){
+    Box(modifier = Modifier
+        .width(390.dp)
+        .height(68.dp)
+        .padding(start = 24.dp, end = 24.dp, top = 16.dp, bottom = 60.dp)
+        .clip(RoundedCornerShape(16.dp))
+        .background(color = MainColor)
+        .clickable {
+
+        }) {
+        Text(text = "CEHCKOUT NOW", modifier = Modifier
+            .align(Alignment.Center),
+            fontSize = 18.sp, color = Color.White,
+        )
+        Text(text = numberOfItems ,
+            modifier = Modifier
+            .align(Alignment.CenterStart).padding(start = 24.dp)
+            .clip(CircleShape)
+            .width(34.dp)
+            .height(34.dp)
+            .background(color = Red900),
+            fontSize = 22.sp,
+            color = Color.White,
+            textAlign = TextAlign.Center
+        )
+    }
 }
