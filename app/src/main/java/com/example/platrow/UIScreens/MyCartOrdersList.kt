@@ -99,7 +99,8 @@ fun OrderListItem(product: Product, onClick : ()-> Unit){
                     IconButton(modifier = Modifier
                         .padding(
                             start = 24.dp,
-                            top = 16.dp
+                            top = 16.dp,
+                            end = 8.dp
                         )
                         .then(Modifier.size(24.dp)),
                         onClick = {onClick}) {
@@ -183,10 +184,10 @@ fun Incrementer (product : Product){
                 modifier = Modifier
                     .padding(end = 24.dp)
                     .align(Alignment.End),
-                fontSize = 14.sp)
+                fontSize = 8.sp)
             Text(text =  "${totalPrice} SAR",
                 modifier = Modifier.padding( top = 8.dp, end = 24.dp),
-                fontSize = 16.sp, color = MainColor)
+                fontSize = 14.sp, color = MainColor)
         }
     }
 }
