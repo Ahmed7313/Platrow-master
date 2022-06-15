@@ -13,11 +13,15 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
+import androidx.compose.ui.text.font.FontStyle
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.TextUnit
@@ -58,19 +62,15 @@ fun MyCartScreen(navigator: DestinationsNavigator) {
         }, backgroundColor = TextFieldColor,
         content = {
             PlatrowTheme {
-//                Column(modifier = Modifier
-//                    .verticalScroll(rememberScrollState())
-//                    .fillMaxWidth()
-//                    .fillMaxHeight()) {
                 LazyColumn(
-                    verticalArrangement = Arrangement.spacedBy(16.dp),
-                    contentPadding = PaddingValues(vertical = 24.dp),
+                    verticalArrangement = Arrangement.spacedBy(dim_large.dp),
+                    contentPadding = PaddingValues(vertical = dim_xlarge.dp),
                     modifier = Modifier.fillMaxWidth()
                 ) {
                     item {
                         Row(
                             modifier = Modifier
-                                .padding(start = 24.dp, end = 24.dp)
+                                .padding(start = dim_xlarge.dp, end = dim_xlarge.dp)
                                 .fillMaxWidth(),
                             horizontalArrangement = Arrangement.SpaceBetween
                         ) {
@@ -111,7 +111,9 @@ fun MyCartScreen(navigator: DestinationsNavigator) {
                         PaymentDetails()
                     }
                     item {
-                        Card(modifier = Modifier.fillMaxWidth().height(140.dp),
+                        Card(modifier = Modifier
+                            .fillMaxWidth()
+                            .height(140.dp),
                         shape = RoundedCornerShape(topStart = 16.dp, topEnd = 16.dp)) {
                             CheckOutButton (orderList.size.toString())
                         }
@@ -216,6 +218,69 @@ fun MultipleStylesInText(text : String, color: Color, fontSize: TextUnit) {
     )
 }
 
+@Preview(showBackground = true)
+@Composable
+fun RemoveAllItemsBottomSheetContent(){
+    Column(
+        modifier = Modifier.fillMaxWidth(),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+
+        Divider(
+            color = dividerColor,
+            thickness = 4.dp,
+            modifier = Modifier
+                .padding(top = dim_xlarge.dp, bottom = dim_large.dp)
+                .align(Alignment.CenterHorizontally)
+                .width(34.dp)
+                .clip(RoundedCornerShape(8.dp)))
+
+        Text(
+            text = "Remove All Items ?",
+            fontSize = 24.sp,
+            color = Color.Black
+        )
+
+        Text(
+            text = "Are you sure you want to delete from the cart?",
+            fontSize = 16.sp,
+            color = TextGrayColor,
+            modifier = Modifier.padding(start = dim_xlarge.dp, end = dim_xlarge.dp)
+        )
+
+        deleteAllItemsBSButton("Delete My Cart", BtnColor){}
+        deleteAllItemsBSButton("DISCARD", BtnColor){}
+
+        Divider(
+            color = TextFieldColor,
+            thickness = 6.dp,
+            modifier = Modifier
+                .padding(top = dim_large.dp, bottom = dim_large.dp)
+                .align(Alignment.CenterHorizontally)
+                .width(44.dp)
+                .clip(RoundedCornerShape(8.dp)))
+    }
+}
+
+@Composable
+fun deleteAllItemsBSButton (text : String, color: Color, onClick: () -> Unit){
+    OutlinedButton(onClick = { onClick },
+        modifier = Modifier
+            .fillMaxWidth(1f)
+            .height(100.dp)
+            .padding(16.dp),
+        shape = RoundedCornerShape(dim_bottom_radius.dp),
+        colors = ButtonDefaults.buttonColors(backgroundColor = color) ) {
+        androidx.compose.material.Text(
+            text = text,
+            fontSize = 24.sp,
+            fontWeight = FontWeight.Bold,
+            fontStyle = FontStyle.Normal,
+            color = Color.White
+        )
+
+    }
+}
 @Preview(showBackground = true)
 @Composable
 fun showMycartVIew() {

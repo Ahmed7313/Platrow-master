@@ -29,6 +29,10 @@ import coil.compose.rememberImagePainter
 import com.example.platrow.model.Product
 import com.example.platrow.R
 import androidx.compose.runtime.*
+import coil.compose.rememberAsyncImagePainter
+import com.example.platrow.dim_button_height
+import com.example.platrow.dim_large
+import com.example.platrow.dim_raduis
 import com.example.platrow.ui.theme.*
 
 val product1 = Product(1,
@@ -55,7 +59,7 @@ val listOfProducts = listOf<Product>(product1, product2,)
 @Composable
 fun OrderItemListColumn(){
 
-    LazyColumn( verticalArrangement = Arrangement.spacedBy(16.dp),
+    LazyColumn( verticalArrangement = Arrangement.spacedBy(dim_large.dp),
         contentPadding = PaddingValues(vertical = 24.dp),
         modifier = Modifier){
         items(listOfProducts){ item ->
@@ -69,18 +73,18 @@ fun OrderListItem(product: Product, onClick : ()-> Unit){
     Card(modifier = Modifier
         .padding(start = 24.dp, end = 24.dp).height(150.dp),
         elevation = 4.dp,
-        shape = RoundedCornerShape(16.dp)) {
+        shape = RoundedCornerShape(dim_raduis.dp)) {
 
         Row(modifier = Modifier
             .fillMaxWidth()
             .background(Color.White)) {
             Image(painter =
-            rememberImagePainter(data = product.listImageUrl[1]),
+            rememberAsyncImagePainter(model = product.listImageUrl[1]),
                 contentDescription = null,
                 modifier = Modifier
                     .size(80.dp)
                     .align(Alignment.CenterVertically)
-                    .clip(RoundedCornerShape(16.dp)))
+                    .clip(RoundedCornerShape(dim_raduis.dp)))
 
             Column(modifier = Modifier.fillMaxWidth()) {
                 Row(modifier = Modifier.fillMaxWidth()) {
@@ -88,7 +92,7 @@ fun OrderListItem(product: Product, onClick : ()-> Unit){
                     Text(
                         modifier = Modifier
                             .requiredWidthIn(max = 184.dp)
-                            .padding(top = 16.dp),
+                            .padding(top = dim_large.dp),
                         text = product.name,
                         textAlign = TextAlign.Center,
                         maxLines = 1,
@@ -99,7 +103,7 @@ fun OrderListItem(product: Product, onClick : ()-> Unit){
                     IconButton(modifier = Modifier
                         .padding(
                             start = 24.dp,
-                            top = 16.dp,
+                            top = dim_large.dp,
                             end = 8.dp
                         )
                         .then(Modifier.size(24.dp)),
@@ -140,7 +144,7 @@ fun Incrementer (product : Product){
         Row(modifier = Modifier
             .width(120.dp)
             .align(Alignment.CenterVertically)
-            .clip(shape = RoundedCornerShape(16.dp))
+            .clip(shape = RoundedCornerShape(dim_raduis.dp))
             .height(38.dp)
             .background(color = TextFieldColor),
             horizontalArrangement = Arrangement.SpaceEvenly,) {
@@ -209,8 +213,8 @@ fun CheckOutButton (numberOfItems: String){
     Box(modifier = Modifier
         .width(390.dp)
         .height(68.dp)
-        .padding(start = 24.dp, end = 24.dp, top = 16.dp, bottom = 60.dp)
-        .clip(RoundedCornerShape(16.dp))
+        .padding(start = 24.dp, end = 24.dp, top = dim_large.dp, bottom = dim_button_height.dp)
+        .clip(RoundedCornerShape(dim_raduis.dp))
         .background(color = MainColor)
         .clickable {
 
