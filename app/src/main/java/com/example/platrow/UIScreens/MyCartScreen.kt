@@ -70,7 +70,9 @@ fun MyCartScreen(navigator: DestinationsNavigator) {
                     item {
                         Row(
                             modifier = Modifier
-                                .padding(start = dim_xlarge.dp, end = dim_xlarge.dp)
+                                .padding(
+                                    start = dim_xlarge.dp,
+                                    end = dim_xlarge.dp)
                                 .fillMaxWidth(),
                             horizontalArrangement = Arrangement.SpaceBetween
                         ) {
@@ -85,7 +87,7 @@ fun MyCartScreen(navigator: DestinationsNavigator) {
                                 .clickable {
                                     orderList.clear()
                                 }) {
-                                Icon(
+                                Image(
                                     painter = painterResource(id = R.drawable.ic_delete),
                                     contentDescription = null,
                                     modifier = Modifier.size(30.dp)
@@ -131,7 +133,7 @@ fun AddproductFromWIshLis(onClick : ()-> Unit) {
         modifier = Modifier
             .fillMaxWidth()
             .padding(start = 24.dp, top = 16.dp)) {
-        Icon(
+        Image(
             painter = painterResource(id = R.drawable.add_circular_button_thin_symbol),
             contentDescription = null,
             modifier = Modifier
@@ -248,11 +250,11 @@ fun RemoveAllItemsBottomSheetContent(){
             modifier = Modifier.padding(start = dim_xlarge.dp, end = dim_xlarge.dp)
         )
 
-        deleteAllItemsBSButton("Delete My Cart", BtnColor){}
-        deleteAllItemsBSButton("DISCARD", BtnColor){}
+        deleteAllItemsBSButton("Delete My Cart", Color.White, BtnColor){}
+        deleteAllItemsBSButton("DISCARD",TextGrayColor, Color.White){}
 
         Divider(
-            color = TextFieldColor,
+            color = dividerColor,
             thickness = 6.dp,
             modifier = Modifier
                 .padding(top = dim_large.dp, bottom = dim_large.dp)
@@ -263,7 +265,10 @@ fun RemoveAllItemsBottomSheetContent(){
 }
 
 @Composable
-fun deleteAllItemsBSButton (text : String, color: Color, onClick: () -> Unit){
+fun deleteAllItemsBSButton (text : String,
+                            textColor: Color,
+                            color: Color,
+                            onClick: () -> Unit){
     OutlinedButton(onClick = { onClick },
         modifier = Modifier
             .fillMaxWidth(1f)
@@ -276,11 +281,12 @@ fun deleteAllItemsBSButton (text : String, color: Color, onClick: () -> Unit){
             fontSize = 24.sp,
             fontWeight = FontWeight.Bold,
             fontStyle = FontStyle.Normal,
-            color = Color.White
+            color = textColor
         )
 
     }
 }
+
 @Preview(showBackground = true)
 @Composable
 fun showMycartVIew() {

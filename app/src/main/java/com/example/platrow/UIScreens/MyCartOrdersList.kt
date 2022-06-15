@@ -108,7 +108,7 @@ fun OrderListItem(product: Product, onClick : ()-> Unit){
                         )
                         .then(Modifier.size(24.dp)),
                         onClick = {onClick}) {
-                        Icon(
+                        Image(
                             painter = painterResource(
                                 id = R.drawable.ic_baseline_cancel_presentation_24),
                             "contentDescription")
@@ -160,7 +160,7 @@ fun Incrementer (product : Product){
                         quantityNumber = number.toString()
                     }
                 }) {
-                Icon(
+                Image(
                     painter = painterResource(id = R.drawable.ic_baseline_horizontal_rule_24),
                     "contentDescription")
             }
@@ -175,7 +175,7 @@ fun Incrementer (product : Product){
                     totalPrice = priceCalculator(product.price, number)
                     quantityNumber = number.toString()
                 }) {
-                Icon(
+                Image(
                     painter = painterResource(id = R.drawable.ic_baseline_add_24),
                     "contentDescription")
             }
